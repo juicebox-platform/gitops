@@ -24,10 +24,9 @@ images:
     repository: reecetec/juicebox
     tag: sportsflow-d052e8b
 
-config:
-  kubernetes_executor:
-    worker_container_repository: reecetec/juicebox
-    worker_container_tag: sportsflow-d052e8b
+  pod_template:
+    repository: reecetec/juicebox
+    tag: sportsflow-d052e8b
 
 # using only k8s executor for now
 redis:
