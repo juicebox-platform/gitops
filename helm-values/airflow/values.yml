@@ -28,6 +28,14 @@ images:
     repository: reecetec/juicebox
     tag: sportsflow-d052e8b
 
+config:
+  kubernetes_executor:
+    worker_container_repository: reecetec/juicebox
+    worker_container_tag: sportsflow-d052e8b
+    namespace: airflow
+    delete_worker_pods: true
+    delete_worker_pods_on_failure: false
+
 # using only k8s executor for now
 redis:
   enabled: false
