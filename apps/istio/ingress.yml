@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/reecetec/homelab-gitops.git 
+    repoURL: https://github.com/juicebox-platform/gitops.git
     targetRevision: HEAD
     path: ingress
     directory:
