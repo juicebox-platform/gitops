@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: argocd
+      repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 8.2.5
+      helm:
+        valueFiles:
+          - $valuesRepo/helm-values/argocd/values.yml
+    - repoURL: https://github.com/reecetec/homelab-gitops.git
+      targetRevision: HEAD
+      ref: valuesRepo
+      path: helm-values/argocd
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argocd
