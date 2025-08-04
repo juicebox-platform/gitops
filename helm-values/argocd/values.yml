@@ -1,2 +1,5 @@
 global:
   domain: argocd.juicebox.com
+
+params:
+  server.insecure: true
