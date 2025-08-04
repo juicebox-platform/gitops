@@ -12,7 +12,7 @@ spec:
       helm:
         valueFiles:
           - $valuesRepo/helm-values/argocd/values.yml
-    - repoURL: https://github.com/reecetec/homelab-gitops.git
+    - repoURL: https://github.com/juicebox-platform/gitops.git
       targetRevision: HEAD
       ref: valuesRepo
       path: helm-values/argocd
