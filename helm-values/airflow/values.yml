@@ -14,19 +14,17 @@ dags:
     branch: main
     subPath: dags
 
-# using only k8s executor for now
-redis:
-  enabled: false
-
 airflow:
   # can eventually use multiple executors concurrently:
   # https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/index.html#using-multiple-executors-concurrently
   executor: KubernetesExecutor
 
   # use sportsflow image
-  images:
-    airflow:
-      repository: reecetec/juicebox
-      tag: sportsflow-d052e8b
-      pullPolicy: Always
+  image:
+    repository: reecetec/juicebox
+    tag: sportsflow-d052e8b
+    pullPolicy: Always
 
+# using only k8s executor for now
+redis:
+  enabled: false
