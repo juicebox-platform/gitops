@@ -21,7 +21,7 @@ redis:
 airflow:
   # can eventually use multiple executors concurrently:
   # https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/index.html#using-multiple-executors-concurrently
-  executor: "KubernetesExecutor"
+  executor: KubernetesExecutor
 
   # use sportsflow image
   images:
