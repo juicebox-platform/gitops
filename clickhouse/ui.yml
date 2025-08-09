@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clickhouse-ui
+  namespace: clickhouse
+  labels:
+    app: clickhouse-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clickhouse-ui
+  template:
+    metadata:
+      labels:
+        app: clickhouse-ui
+    spec:
+      containers:
+      - name: ch-ui
+        image: ghcr.io/caioricciuti/ch-ui:latest
+        ports:
+        - containerPort: 5521
+        env:
+        - name: VITE_CLICKHOUSE_URL
+          value: "http://chi-clickhouse-cluster-simple-0-0:8123"
+        - name: VITE_CLICKHOUSE_USER
+          value: "default"
+        - name: VITE_CLICKHOUSE_PASS
+          value: ""
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clickhouse-ui-service
+  namespace: clickhouse
+  labels:
+    app: clickhouse-ui
+spec:
+  type: LoadBalancer  
+  ports:
+  - port: 5521
+    targetPort: 5521
+    protocol: TCP
+    name: http
+  selector:
+    app: clickhouse-ui
