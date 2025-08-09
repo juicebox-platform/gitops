@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - chart: altinity-clickhouse-operator/altinity-clickhouse-operator
+    - chart: altinity-clickhouse-operator
       repoURL: https://docs.altinity.com/clickhouse-operator
       targetRevision: 0.25.3
       helm:
