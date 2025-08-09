@@ -11,10 +11,6 @@ createUserJob:
   labels:
     app: airflow
     component: create-user
-  selector:
-    matchLabels:
-      app: airflow
-      component: create-user
 
 migrateDatabaseJob:
   useHelmHooks: false
@@ -22,10 +18,6 @@ migrateDatabaseJob:
   labels:
     app: airflow
     component: run-airflow-migrations
-  selector:
-    matchLabels:
-      app: airflow
-      component: run-airflow-migrations
 
 env:
   - name: AIRFLOW__DAG_PROCESSOR__DAG_BUNDLE_CONFIG_LIST
