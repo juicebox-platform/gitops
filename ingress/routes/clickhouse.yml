@@ -7,9 +7,58 @@ spec:
   parentRefs:
   - name: juicebox-gateway
     namespace: istio-system
-  hostnames: 
+  hostnames:
   - "clickhouse.juicebox.com"
   rules:
+  # ClickHouse API at /api/*
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
+    - type: ResponseHeaderModifier
+      responseHeaderModifier:
+        add:
+        - name: Access-Control-Allow-Origin
+          value: "https://clickhouse.juicebox.com"
+        - name: Access-Control-Allow-Methods
+          value: "GET, POST, OPTIONS"
+        - name: Access-Control-Allow-Headers
+          value: "Content-Type, Authorization, X-ClickHouse-User, X-ClickHouse-Key"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+    backendRefs:
+    - name: chi-clickhouse-cluster-simple-0-0
+      port: 8123
+  # Handle CORS preflight for API
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/
+      method: OPTIONS
+    filters:
+    - type: ResponseHeaderModifier
+      responseHeaderModifier:
+        add:
+        - name: Access-Control-Allow-Origin
+          value: "https://clickhouse.juicebox.com"
+        - name: Access-Control-Allow-Methods
+          value: "GET, POST, OPTIONS"
+        - name: Access-Control-Allow-Headers
+          value: "Content-Type, Authorization, X-ClickHouse-User, X-ClickHouse-Key"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Max-Age
+          value: "86400"
+    backendRefs:
+    - name: chi-clickhouse-cluster-simple-0-0
+      port: 8123
+  # ClickHouse UI at root /
   - matches:
     - path:
         type: PathPrefix
