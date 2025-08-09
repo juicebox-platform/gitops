@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: clickhouse
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: atlinity-clickhouse-operator
+      repoURL: https://docs.altinity.com/clickhouse-operator
+      targetRevision: 0.25.3
+      helm:
+        valueFiles:
+          - $valuesRepo/helm-values/clickhouse/values.yml
+    - repoURL: https://github.com/juicebox-platform/gitops.git
+      targetRevision: HEAD
+      ref: valuesRepo
+      path: helm-values/clickhouse
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: clickhouse
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
