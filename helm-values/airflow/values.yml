@@ -1,23 +1,9 @@
-# createUserJob:
-#   useHelmHooks: false
-#   applyCustomEnv: false
-# migrateDatabaseJob:
-#   useHelmHooks: false
-#   applyCustomEnv: false
-
 createUserJob:
   useHelmHooks: false
   applyCustomEnv: false
-  labels:
-    app: airflow
-    component: create-user
-
 migrateDatabaseJob:
   useHelmHooks: false
   applyCustomEnv: false
-  labels:
-    app: airflow
-    component: run-airflow-migrations
 
 env:
   - name: AIRFLOW__DAG_PROCESSOR__DAG_BUNDLE_CONFIG_LIST
