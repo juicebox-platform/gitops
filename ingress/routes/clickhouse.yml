@@ -22,7 +22,7 @@ spec:
       urlRewrite:
         path:
           type: ReplacePrefixMatch
-          replacePrefixMatch: /
+          replacePrefixMatch: ""
     - type: ResponseHeaderModifier
       responseHeaderModifier:
         add:
