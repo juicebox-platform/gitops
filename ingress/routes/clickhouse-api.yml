@@ -1,19 +1,19 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: clickhouse-route
+  name: clickhouse-api-route
   namespace: clickhouse
 spec:
   parentRefs:
   - name: juicebox-gateway
     namespace: istio-system
   hostnames: 
-  - "clickhouse.juicebox.com"
+  - "clickhouse-api.juicebox.com"
   rules:
   - matches:
     - path:
         type: PathPrefix
         value: /
     backendRefs:
-    - name: clickhouse-ui-service
-      port: 5521
+    - name: clickhouse-cluster
+      port: 8123
