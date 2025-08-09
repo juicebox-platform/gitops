@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: clickhouse
+  name: clickhouse-operator
   namespace: argocd
 spec:
   project: default
@@ -11,11 +11,11 @@ spec:
       targetRevision: 0.25.3
       helm:
         valueFiles:
-          - $valuesRepo/helm-values/clickhouse/values.yml
+          - $valuesRepo/helm-values/clickhouse-operator/values.yml
     - repoURL: https://github.com/juicebox-platform/gitops.git
       targetRevision: HEAD
       ref: valuesRepo
-      path: helm-values/clickhouse
+      path: helm-values/clickhouse-operator
   destination:
     server: "https://kubernetes.default.svc"
     namespace: clickhouse
