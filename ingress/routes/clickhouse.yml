@@ -8,21 +8,16 @@ spec:
   - name: juicebox-gateway
     namespace: istio-system
   hostnames:
-  - "clickhouse.juicebox.com"
+  - "clickhouse-api.juicebox.com"
   rules:
   - matches:
     - path:
         type: PathPrefix
-        value: /api
+        value: /
     backendRefs:
     - name: clickhouse-service  
       port: 8123
     filters:
-    - type: URLRewrite
-      urlRewrite:
-        path:
-          type: ReplacePrefixMatch
-          replacePrefixMatch: ""
     - type: ResponseHeaderModifier
       responseHeaderModifier:
         add:
@@ -34,10 +29,3 @@ spec:
           value: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
         - name: Access-Control-Allow-Credentials
           value: "true"
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    backendRefs:
-    - name: clickhouse-ui-service
-      port: 5521
