@@ -18,6 +18,11 @@ spec:
     - name: clickhouse-service  
       port: 8123
     filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
     - type: ResponseHeaderModifier
       responseHeaderModifier:
         add:
