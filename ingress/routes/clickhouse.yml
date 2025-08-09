@@ -20,7 +20,7 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-    - name: clickhouse-service  
+    - name: clickhouse-clickhouse-cluster  
       port: 8123
     filters:
     - type: ResponseHeaderModifier
