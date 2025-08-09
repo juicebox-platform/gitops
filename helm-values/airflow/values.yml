@@ -6,32 +6,28 @@ migrateDatabaseJob:
   applyCustomEnv: false
 
 
-dags:
-  gitSync:
-    enabled: true
-    repo: https://github.com/juicebox-platform/sportsflow.git
-    rev: HEAD
-    branch: main
-    subPath: dags
+env:
+  - name: AIRFLOW__DAG_PROCESSOR__DAG_BUNDLE_CONFIG_LIST
+    value: |-
+      [
+        {
+          "name": "sportsflow_dags",
+          "classpath": "airflow.providers.git.bundles.git.GitDagBundle",
+          "kwargs": {
+            "repo_url": "https://github.com/juicebox-platform/sportsflow.git",
+            "tracking_ref": "main",
+            "subdir": "dags",
+            "refresh_interval": 300
+          }
+        }
+      ]
 
 # can eventually use multiple executors concurrently:
 # https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/index.html#using-multiple-executors-concurrently
 executor: KubernetesExecutor
 
-images:
-  airflow:
-    # use sportsflow image
-    repository: reecetec/juicebox
-    tag: sportsflow-d052e8b
-
-  pod_template:
-    repository: reecetec/juicebox
-    tag: sportsflow-d052e8b
-
 config:
   kubernetes_executor:
-    worker_container_repository: reecetec/juicebox
-    worker_container_tag: sportsflow-d052e8b
     namespace: airflow
     delete_worker_pods: true
     delete_worker_pods_on_failure: false
