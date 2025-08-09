@@ -22,15 +22,3 @@ spec:
     backendRefs:
     - name: clickhouse-clickhouse-cluster  
       port: 8123
-    filters:
-    - type: ResponseHeaderModifier
-      responseHeaderModifier:
-        add:
-        - name: Access-Control-Allow-Origin
-          value: "https://clickhouse.juicebox.com"
-        - name: Access-Control-Allow-Methods
-          value: "GET, POST, OPTIONS"
-        - name: Access-Control-Allow-Headers
-          value: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
-        - name: Access-Control-Allow-Credentials
-          value: "true"
