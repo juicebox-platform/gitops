@@ -13,6 +13,11 @@ spec:
         layout:
           shardsCount: 1
           replicasCount: 1
+    users:
+      default/password: "default"
+      default/networks/ip: "::/0"
+      default/profile: "default"
+      default/quota: "default"
   templates:
     volumeClaimTemplates:
       - name: data-volume-template
