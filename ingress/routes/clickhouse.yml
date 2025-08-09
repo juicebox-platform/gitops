@@ -25,8 +25,8 @@ spec:
         - name: Access-Control-Allow-Credentials
           value: "true"
     backendRefs:
-    - name: clickhouse-service  
-      port: 8123
+    - name: nginx-cors-service  
+      port: 80
   - matches:
     - path:
         type: PathPrefix
