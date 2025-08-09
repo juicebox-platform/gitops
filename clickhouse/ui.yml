@@ -22,7 +22,7 @@ spec:
         - containerPort: 5521
         env:
         - name: VITE_CLICKHOUSE_URL
-          value: "http://chi-clickhouse-cluster-simple-0-0:8123"
+          value: "https://chi-clickhouse-cluster-simple-0-0:8123"
         - name: VITE_CLICKHOUSE_USER
           value: "default"
         - name: VITE_CLICKHOUSE_PASS
