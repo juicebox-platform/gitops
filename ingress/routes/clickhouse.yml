@@ -11,6 +11,26 @@ spec:
   - "clickhouse-api.juicebox.com"
   rules:
   - matches:
+    - method: OPTIONS
+    filters:
+    - type: ResponseHeaderModifier
+      responseHeaderModifier:
+        add:
+        - name: Access-Control-Allow-Origin
+          value: "https://clickhouse.juicebox.com"
+        - name: Access-Control-Allow-Methods
+          value: "GET, POST, OPTIONS"
+        - name: Access-Control-Allow-Headers
+          value: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: clickhouse-api.juicebox.com
+        port: 443
+        statusCode: 200
+  - matches:
     - path:
         type: PathPrefix
         value: /
